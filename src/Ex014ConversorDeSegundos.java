@@ -2,23 +2,35 @@ public class Ex014ConversorDeSegundos {
 
     public static void main(String[] args) {
 
-        getDurationString(3600);
-
+        System.out.println(getDurationString(-3945));
+        System.out.println(getDurationStrings(-65, 45));
+        System.out.println(getDurationStrings(65, 145));
+        System.out.println(getDurationStrings(65, 45));
+        System.out.println(getDurationString(3945));
     }
 
-    public static void getDurationString(int seconds) {
+    public static String getDurationString(int segundos) {
 
-        int minutes = seconds / 60;
+        if (segundos < 0) {
+            return "Valor inválido para segundos (" + segundos + "), número positivo necessário";
+        }
 
-        getDurationStrings(minutes, seconds);
+        return getDurationStrings(segundos / 60, segundos % 60);
     }
 
-    public static void getDurationStrings(int minutes, int seconds) {
+    public static String getDurationStrings(int minutos, int segundos) {
 
-        int hour = seconds / 3600;
-        int restMinutes = minutes % 60;
-        int restSeconds = seconds % 60;
+        if (minutos < 0) {
+            return "Valor inválido para minutos (" + minutos + "), número positivo necessário";
+        }
 
-        System.out.println(seconds + "s = " + hour + "h " + restMinutes + "m " + restSeconds + "s");
+        if ( segundos < 0 || segundos > 59) {
+            return "Valor inválido para segundos (" + segundos + "), número entre 0 e 59 necessário";
+        }
+
+        int horas = minutos / 60;
+        int restMinutos = minutos % 60;
+
+        return horas + "h " + restMinutos + "m " + segundos + "s";
     }
 }
